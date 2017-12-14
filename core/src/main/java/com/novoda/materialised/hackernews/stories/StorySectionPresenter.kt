@@ -72,20 +72,3 @@ class StorySectionPresenter private constructor(
 
     private val onError: (Throwable) -> Unit = { storiesView.showError() }
 }
-
-fun partialPresenter(storyIdProvider: StoryIdProvider,
-                     singleStoryProvider: SingleStoryProvider,
-                     navigator: Navigator,
-                     subscribeScheduler: Scheduler,
-                     observeScheduler: Scheduler): (AsyncListView<StoryViewData>) -> Presenter<Section> {
-    return { asyncListView ->
-        StorySectionPresenter(
-                storyIdProvider,
-                singleStoryProvider,
-                asyncListView,
-                navigator,
-                subscribeScheduler,
-                observeScheduler
-        )
-    }
-}
