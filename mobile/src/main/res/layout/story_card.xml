@@ -7,10 +7,6 @@
       name="viewData"
       type="com.novoda.materialised.hackernews.stories.view.StoryViewData" />
 
-    <variable
-      name="viewBehaviour"
-      type="com.novoda.materialised.hackernews.asynclistview.ViewModel" />
-
   </data>
 
   <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
@@ -30,7 +26,6 @@
       <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:onClick="@{() -> viewBehaviour.invokeBehaviour()}"
         android:paddingBottom="@dimen/story_card_vertical_padding"
         android:paddingLeft="@dimen/story_card_horizontal_padding"
         android:paddingRight="@dimen/story_card_horizontal_padding"

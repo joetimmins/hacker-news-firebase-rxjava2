@@ -1,6 +1,5 @@
 package com.novoda.materialised.hackernews.stories.provider
 
-import com.novoda.materialised.hackernews.section.Section
 import io.reactivex.Observable
 import io.reactivex.Single
 
@@ -8,7 +7,7 @@ internal class IdOnlyStoryProvider(
         private val storyIdProvider: StoryIdProvider
 ) {
 
-    fun idOnlyStoriesFor(section: Section): Single<List<Story>> {
+    fun idOnlyStoriesFor(section: String): Single<List<Story>> {
         val listOfStoryIds = storyIdProvider.listOfStoryIds(section)
 
         return listOfStoryIds

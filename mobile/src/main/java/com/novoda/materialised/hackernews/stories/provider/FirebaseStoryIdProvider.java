@@ -3,7 +3,6 @@ package com.novoda.materialised.hackernews.stories.provider;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.novoda.materialised.hackernews.section.Section;
 
 import java.util.List;
 
@@ -20,8 +19,8 @@ final class FirebaseStoryIdProvider implements StoryIdProvider {
     }
 
     @Override
-    public Single<List<Long>> listOfStoryIds(@NotNull Section section) {
-        DatabaseReference reference = firebaseDatabase.getReference("v0").child(section.getId());
+    public Single<List<Long>> listOfStoryIds(@NotNull String section) {
+        DatabaseReference reference = firebaseDatabase.getReference("v0").child(section);
 
         Function1<DataSnapshot, List<Long>> converter = new Function1<DataSnapshot, List<Long>>() {
             @Override

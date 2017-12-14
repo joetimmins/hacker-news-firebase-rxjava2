@@ -9,12 +9,9 @@ import android.widget.LinearLayout;
 
 import com.novoda.materialised.R;
 import com.novoda.materialised.databinding.StoryCardBinding;
-import com.novoda.materialised.hackernews.asynclistview.ModelledView;
-import com.novoda.materialised.hackernews.asynclistview.ViewModel;
 
 public final class StoryCardView
-        extends LinearLayout
-        implements ModelledView<StoryViewData> {
+        extends LinearLayout {
 
     private StoryCardBinding storyCard;
 
@@ -33,10 +30,8 @@ public final class StoryCardView
         init(context);
     }
 
-    @Override
-    public void updateWith(@NonNull ViewModel<StoryViewData> viewModel) {
-        storyCard.setViewData(viewModel.getViewData());
-        storyCard.setViewBehaviour(viewModel);
+    public void updateWith(@NonNull StoryViewData viewModel) {
+        storyCard.setViewData(viewModel);
     }
 
     private void init(Context context) {

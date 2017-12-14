@@ -8,7 +8,7 @@ private val defaultValue = 236
 class NullHandlerKtTest {
 
     @Test
-    fun returnDefaultValue_WhenFunctionReturnsNull() {
+    fun `return default value when function returns null`() {
         val result = handleNullable({ null }, defaultValue)
 
         assertThat(result).isEqualTo(defaultValue)
