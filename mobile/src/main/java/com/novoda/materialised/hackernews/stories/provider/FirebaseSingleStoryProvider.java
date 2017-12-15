@@ -4,21 +4,22 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import org.jetbrains.annotations.NotNull;
+import java.util.List;
 
+import io.reactivex.Observable;
+import io.reactivex.ObservableSource;
 import io.reactivex.Single;
+import io.reactivex.functions.Function;
 import kotlin.jvm.functions.Function1;
 
-final class FirebaseSingleStoryProvider implements SingleStoryProvider {
+final class FirebaseSingleStoryProvider {
     private final FirebaseDatabase firebaseDatabase;
 
     FirebaseSingleStoryProvider(FirebaseDatabase firebaseDatabase) {
         this.firebaseDatabase = firebaseDatabase;
     }
 
-    @NotNull
-    @Override
-    public Single<Story> obtainStory(int storyId) {
+    Single<Story> obtainStory(int storyId) {
         DatabaseReference items = firebaseDatabase.getReference("v0").child("item");
 
         DatabaseReference storyWithId = items.child(Integer.toString(storyId));
@@ -29,5 +30,15 @@ final class FirebaseSingleStoryProvider implements SingleStoryProvider {
             }
         };
         return FirebaseSingleEventListener.listen(storyWithId, converter);
+    }
+
+    Observable<Story> obtainStories(List<Integer> input) {
+        return Observable.fromIterable(input)
+                .flatMap(new Function<Integer, ObservableSource<Story>>() {
+                    @Override
+                    public ObservableSource<Story> apply(Integer integer) throws Exception {
+                        return obtainStory(integer).toObservable();
+                    }
+                });
     }
 }

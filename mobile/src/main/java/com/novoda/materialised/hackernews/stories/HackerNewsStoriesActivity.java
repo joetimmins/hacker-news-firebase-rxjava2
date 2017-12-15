@@ -10,7 +10,6 @@ import com.novoda.materialised.R;
 import com.novoda.materialised.databinding.MainActivityBinding;
 import com.novoda.materialised.hackernews.stories.provider.ProviderFactory;
 import com.novoda.materialised.hackernews.stories.provider.SingleStoryProvider;
-import com.novoda.materialised.hackernews.stories.provider.StoryIdProvider;
 
 public final class HackerNewsStoriesActivity extends AppCompatActivity {
 
@@ -22,7 +21,6 @@ public final class HackerNewsStoriesActivity extends AppCompatActivity {
 
         setSupportActionBar(mainActivityLayout.toolbar);
 
-        StoryIdProvider storyIdProvider = ProviderFactory.newStoryIdProvider(this);
         SingleStoryProvider singleStoryProvider = ProviderFactory.newSingleStoryProvider(this);
     }
 
