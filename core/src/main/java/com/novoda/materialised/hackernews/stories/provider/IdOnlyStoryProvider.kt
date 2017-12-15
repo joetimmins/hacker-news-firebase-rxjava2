@@ -8,7 +8,7 @@ internal class IdOnlyStoryProvider(
 ) {
 
     fun idOnlyStoriesFor(section: String): Single<List<Story>> {
-        val listOfStoryIds = storyIdProvider.listOfStoryIds(section)
+        val listOfStoryIds = storyIdProvider.topStoryIds()
 
         return listOfStoryIds
                 .flatMapObservable { longs -> Observable.fromIterable(longs) }

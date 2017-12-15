@@ -19,15 +19,15 @@ final class FirebaseSingleStoryProvider implements SingleStoryProvider {
     @NotNull
     @Override
     public Single<Story> obtainStory(int storyId) {
-        final DatabaseReference databaseReference = firebaseDatabase.getReference("v0").child("item");
-        final Function1<DataSnapshot, Story> converter = new Function1<DataSnapshot, Story>() {
+        DatabaseReference items = firebaseDatabase.getReference("v0").child("item");
+
+        DatabaseReference storyWithId = items.child(Integer.toString(storyId));
+        Function1<DataSnapshot, Story> converter = new Function1<DataSnapshot, Story>() {
             @Override
             public Story invoke(DataSnapshot dataSnapshot) {
                 return dataSnapshot.getValue(Story.class);
             }
         };
-
-        DatabaseReference childReference = databaseReference.child(Integer.toString(storyId));
-        return FirebaseSingleEventListener.listen(childReference, converter);
+        return FirebaseSingleEventListener.listen(storyWithId, converter);
     }
 }

@@ -6,8 +6,6 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.List;
 
-import org.jetbrains.annotations.NotNull;
-
 import io.reactivex.Single;
 import kotlin.jvm.functions.Function1;
 
@@ -19,8 +17,8 @@ final class FirebaseStoryIdProvider implements StoryIdProvider {
     }
 
     @Override
-    public Single<List<Long>> listOfStoryIds(@NotNull String section) {
-        DatabaseReference reference = firebaseDatabase.getReference("v0").child(section);
+    public Single<List<Long>> topStoryIds() {
+        DatabaseReference reference = firebaseDatabase.getReference("v0").child("topstories");
 
         Function1<DataSnapshot, List<Long>> converter = new Function1<DataSnapshot, List<Long>>() {
             @Override

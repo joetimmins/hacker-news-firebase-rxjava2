@@ -1,7 +1,6 @@
 package com.novoda.materialised.hackernews.stories.provider;
 
 import com.google.firebase.database.FirebaseDatabase;
-import com.novoda.materialised.hackernews.section.Section;
 
 import java.util.Arrays;
 import java.util.List;
@@ -19,11 +18,11 @@ public class FirebaseStoryIdProviderTest {
         TestObserver<List<Long>> testObserver = new TestObserver<>();
         List<Long> expectedStoryIds = Arrays.asList(8863L, 9001L, 9004L);
 
-        FirebaseDatabase storyTypeFirebaseDatabase = FakeFirebase.getDatabaseForStoryType(Section.BEST, expectedStoryIds);
+        FirebaseDatabase storyTypeFirebaseDatabase = FakeFirebase.storyIdDatabase(expectedStoryIds);
 
         // Act
         FirebaseStoryIdProvider provider = new FirebaseStoryIdProvider(storyTypeFirebaseDatabase);
-        Single<List<Long>> idOnlyStories = provider.listOfStoryIds(Section.BEST);
+        Single<List<Long>> idOnlyStories = provider.topStoryIds();
         idOnlyStories.subscribe(testObserver);
 
         // Assert
