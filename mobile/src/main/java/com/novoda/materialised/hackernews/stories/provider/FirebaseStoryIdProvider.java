@@ -9,7 +9,7 @@ import java.util.List;
 import io.reactivex.Single;
 import kotlin.jvm.functions.Function1;
 
-final class FirebaseStoryIdProvider {
+public final class FirebaseStoryIdProvider {
     private final FirebaseDatabase firebaseDatabase;
 
     FirebaseStoryIdProvider(FirebaseDatabase firebaseDatabase) {

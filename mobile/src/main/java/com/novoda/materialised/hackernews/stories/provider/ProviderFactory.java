@@ -10,4 +10,9 @@ public final class ProviderFactory {
         FirebaseDatabase firebaseDatabase = FirebaseSingleton.INSTANCE.getFirebaseDatabase(context);
         return new FirebaseStoryProvider(firebaseDatabase);
     }
+
+    public static FirebaseStoryIdProvider newStoryIdProvider(Context context) {
+        FirebaseDatabase firebaseDatabase = FirebaseSingleton.INSTANCE.getFirebaseDatabase(context);
+        return new FirebaseStoryIdProvider(firebaseDatabase);
+    }
 }
