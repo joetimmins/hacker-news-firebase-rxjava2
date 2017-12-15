@@ -14,6 +14,8 @@ import com.novoda.materialised.hackernews.stories.provider.ProviderFactory;
 
 public final class HackerNewsStoriesActivity extends AppCompatActivity {
 
+    private StoriesPresenter storiesPresenter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,13 +24,22 @@ public final class HackerNewsStoriesActivity extends AppCompatActivity {
 
         setSupportActionBar(mainActivityLayout.toolbar);
 
-        FirebaseStoryProvider storyProvider = ProviderFactory.newStoryProvider(this);
         FirebaseStoryIdProvider storyIdProvider = ProviderFactory.newStoryIdProvider(this);
+        FirebaseStoryProvider storyProvider = ProviderFactory.newStoryProvider(this);
+
+        storiesPresenter = new StoriesPresenter(
+                storyIdProvider,
+                storyProvider,
+                mainActivityLayout.loadingView,
+                mainActivityLayout.storiesView
+        );
     }
 
     @Override
     protected void onResume() {
         super.onResume();
+        storiesPresenter.present();
+
     }
 
     @Override
