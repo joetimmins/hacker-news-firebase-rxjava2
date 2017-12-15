@@ -16,7 +16,7 @@ class StoryViewDataTest {
     }
 
     @Test
-    fun submittedFromDoesNotStripPrefixFromDomainName_WhenItIsNotWWW() {
+    fun submittedFromDoesNotStripPrefixFromDomainNameWhenItIsNotWWW() {
         val expectedDomainName = "news.ycombinator.com"
         val fullDomainName = "http://$expectedDomainName/"
         val data = StoryViewData(url = fullDomainName)
@@ -25,7 +25,7 @@ class StoryViewDataTest {
     }
 
     @Test
-    fun submittedFromReturnsEmptyString_WhenUrlIsEmptyString() {
+    fun submittedFromReturnsEmptyStringWhenUrlIsEmptyString() {
         val empty = StoryViewData()
         assertThat(empty.submittedFrom()).isEqualTo("")
     }
