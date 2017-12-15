@@ -25,7 +25,7 @@ public final class FirebaseStoryProvider {
         this.firebaseDatabase = firebaseDatabase;
     }
 
-    Observable<Story> obtainStories(List<Integer> input) {
+    public Observable<Story> obtainStories(List<Integer> input) {
         return Observable.fromIterable(input)
                 .flatMap(new Function<Integer, ObservableSource<Story>>() {
                     @Override
