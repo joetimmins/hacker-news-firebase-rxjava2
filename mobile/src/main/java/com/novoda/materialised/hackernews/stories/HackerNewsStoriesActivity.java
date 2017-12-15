@@ -8,8 +8,8 @@ import android.view.MenuItem;
 
 import com.novoda.materialised.R;
 import com.novoda.materialised.databinding.MainActivityBinding;
+import com.novoda.materialised.hackernews.stories.provider.FirebaseStoryProvider;
 import com.novoda.materialised.hackernews.stories.provider.ProviderFactory;
-import com.novoda.materialised.hackernews.stories.provider.SingleStoryProvider;
 
 public final class HackerNewsStoriesActivity extends AppCompatActivity {
 
@@ -21,7 +21,7 @@ public final class HackerNewsStoriesActivity extends AppCompatActivity {
 
         setSupportActionBar(mainActivityLayout.toolbar);
 
-        SingleStoryProvider singleStoryProvider = ProviderFactory.newSingleStoryProvider(this);
+        FirebaseStoryProvider storyProvider = ProviderFactory.newStoryProvider(this);
     }
 
     @Override
