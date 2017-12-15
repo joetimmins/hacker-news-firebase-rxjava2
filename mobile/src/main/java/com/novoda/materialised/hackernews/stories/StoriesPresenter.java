@@ -13,6 +13,7 @@ import java.util.List;
 
 import io.reactivex.ObservableSource;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Action;
 import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
@@ -23,7 +24,9 @@ class StoriesPresenter {
     private final TextView loadingView;
     private final RecyclerView storiesView;
 
-    private List<Story> stories;
+    private static final String TAG = "something";
+
+    private List<Story> stories = new ArrayList<>();
 
     StoriesPresenter(FirebaseStoryIdProvider storyIdProvider,
                      FirebaseStoryProvider storyProvider,
@@ -40,6 +43,7 @@ class StoriesPresenter {
                 .map(new Function<List<Long>, List<Integer>>() {
                     @Override
                     public List<Integer> apply(List<Long> longs) throws Exception {
+                        Log.d(TAG, "mapping longs to ints");
                         List<Integer> result = new ArrayList<>(longs.size());
                         for (Long id : longs) {
                             result.add(id.intValue());
@@ -50,18 +54,25 @@ class StoriesPresenter {
                 .flatMapObservable(new Function<List<Integer>, ObservableSource<Story>>() {
                     @Override
                     public ObservableSource<Story> apply(List<Integer> ids) throws Exception {
+                        Log.d(TAG, "obtaining stories");
                         return storyProvider.obtainStories(ids);
                     }
                 })
                 .doOnNext(new Consumer<Story>() {
                     @Override
                     public void accept(Story story) throws Exception {
+                        Log.d(TAG, "adding stories");
                         stories.add(story);
                     }
                 })
+                .doOnComplete(new Action() {
+                    @Override
+                    public void run() throws Exception {
+                        Log.d(TAG, "stories" + stories);
+                    }
+                })
                 .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread());
-
-        Log.d("something", "something");
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe();
     }
 }

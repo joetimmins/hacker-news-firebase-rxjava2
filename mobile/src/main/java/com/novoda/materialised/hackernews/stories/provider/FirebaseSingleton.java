@@ -20,10 +20,10 @@ enum FirebaseSingleton {
     private void initialiseFirebaseAppIfNecessary(Context context) {
         if (firebaseApp == null) {
             FirebaseOptions firebaseOptions = new FirebaseOptions.Builder()
-                    .setApplicationId("com.novoda.materialised") // build() throws an exception if this isn't set
+                    .setApplicationId("com.novoda.hacker-news") // build() throws an exception if this isn't set
                     .setDatabaseUrl("https://hacker-news.firebaseio.com")
                     .build();
-            firebaseApp = FirebaseApp.initializeApp(context.getApplicationContext(), firebaseOptions, "Materialised");
+            firebaseApp = FirebaseApp.initializeApp(context.getApplicationContext(), firebaseOptions, "Hacker News");
         }
     }
 
