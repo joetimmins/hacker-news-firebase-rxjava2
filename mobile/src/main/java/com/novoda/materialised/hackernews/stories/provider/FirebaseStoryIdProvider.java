@@ -9,14 +9,13 @@ import java.util.List;
 import io.reactivex.Single;
 import kotlin.jvm.functions.Function1;
 
-final class FirebaseStoryIdProvider implements StoryIdProvider {
+final class FirebaseStoryIdProvider {
     private final FirebaseDatabase firebaseDatabase;
 
     FirebaseStoryIdProvider(FirebaseDatabase firebaseDatabase) {
         this.firebaseDatabase = firebaseDatabase;
     }
 
-    @Override
     public Single<List<Long>> topStoryIds() {
         DatabaseReference reference = firebaseDatabase.getReference("v0").child("topstories");
 
